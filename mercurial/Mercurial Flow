@@ -1,0 +1,19 @@
+
+
+
+Feature
+1 - hg flow feature start myfeature
+2 - hg flow feature finish myfeature
+
+3 - hg flow release start myRelease
+    hg flow release publish myRelease
+4 - hg flow release finish myRelease 
+    hg push --tags
+
+if something went bad you always can revert
+hg update --clean
+
+Hotfix
+1 - hg flow hotgix start myHotfix
+2 - hg flow hitfix finish myHotfix
+
