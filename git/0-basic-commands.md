@@ -40,3 +40,11 @@ git config --global branch.autosetupmerge always
 * git branch -d [name-of-the-branch]
 * if you need to force use the -D param, like git branch -D [name-of-the-branch]
 
+# how to update a deleted branch 
+* git push orign --delete [name-of-the-branch]
+
+# how to propagate changes after delete
+* git fetch --all --prune
+* note: prune option is to delete all untracked branhces
+
+
