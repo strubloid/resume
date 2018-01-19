@@ -1,0 +1,3 @@
+# run for configure the dev envirionment
+
+bin/mageconfigsync load --env="dev" /home/strubloid/webroot/greenes-shoes/app/code/local/Greenes/Core/etc/dev.ym

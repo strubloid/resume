@@ -2,6 +2,7 @@
 
 # links
 * https://felipec.wordpress.com/2013/09/01/advanced-git-concepts-the-upstream-tracking-branch/
+* https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-both-locally-and-remotely
 
 # how to get a repository?
 * git clone [url-of-repository]

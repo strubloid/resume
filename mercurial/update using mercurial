@@ -13,5 +13,3 @@ phpstorm
 6 - choose the branch if it is a feature choose develop else (hotfix) choose default
 7 - resolve all conflicts
 8 - hg commit -m "mergin with [name-of-the-branch]"
-
-
