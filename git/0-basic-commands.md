@@ -19,6 +19,10 @@ git config push.default simple
 git config push.default current
 * note: on the other hand **current** donsen't care about whether or not the current branch tracks an upstream
 
+# whats a upstrem
+* it is the continuation of a main branch to another, so if you setup a branch x to be uptream to master, it is needed to merge into master code for delete this branch for example.
+* this is a connection between 2 branches
+
 # how show all branches upstreams
 git branch -vv
 
@@ -29,3 +33,10 @@ git branch -vv
 
 # how configure git so will be always creating with the master upstream 
 git config --global branch.autosetupmerge always
+
+
+# how to delete a branch
+* git checkout [another-branch]
+* git branch -d [name-of-the-branch]
+* if you need to force use the -D param, like git branch -D [name-of-the-branch]
+
