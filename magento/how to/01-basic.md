@@ -34,3 +34,6 @@ Mage::getBaseUrl( Mage_Core_Model_Store::URL_TYPE_WEB, true );
 $this->getLoadedProductCollection()->clear()->addAttributeToSelect('package_sticker_id');
 ```
 
+## remove methods
+<remove name="top" />
+<action method="unsetChild"><name>topSearchContainer</name></action>
