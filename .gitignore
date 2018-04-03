@@ -1,0 +1,6 @@
+
+# phpstorm
+.idea/
+
+# git
+.gitignore.swp

@@ -1,11 +1,14 @@
-# how to translate a file
+# how to save a config data
 
-
-https://alanstorm.com/magento_loading_config_variables/
-
+## script
 ```
 $store=Mage::app()->getStore()->getStoreId();
 Mage::getConfig()->saveConfig('design/head/demonotice', '1', 'default', 0);
 ```
 
-http://prattski.com/2014/09/23/using-the-magento-registry-mageregister/
+## extra
+```
+// setting that will be the update mode
+Mage::app()->setUpdateMode(true);
+```
+> http://prattski.com/2014/09/23/using-the-magento-registry-mageregister/

@@ -1,6 +1,6 @@
 # Mercurial Basics
 
-## how to remove uncommited branch
+## how to remove uncommitted branch
 ```
 hg strip [my-pruned-branch-name]
 ```
@@ -9,3 +9,9 @@ hg strip [my-pruned-branch-name]
 ```
 hg purge --all
 ```
+
+## how to revert uncommited changes
+```
+hg update --clean
+```
+

@@ -1,9 +1,13 @@
 # how to translate a file
 
 ## place
-/home/strubloid/webroot/bathandshower/app/design/frontend/boilerplate/bathandshower/locale/en_GB/translate.csv
+```
+app/design/frontend/boilerplate/[project-name]/locale/en_GB/translate.csv
+```
 
+## how is the file structure
 ```
 "General Subscription", "Tick if you wish to receive special offers from Bathandshower.com"
 ```
-Fist line is the actual text, second line is the translation of it.
+* first text: this is the actual text that would be shown 
+* second text: this is the translation of it.

@@ -1,4 +1,4 @@
-# reindex by upgradescript
+# reindex by upgrade script
 
 ```
 $this->startSetup();
