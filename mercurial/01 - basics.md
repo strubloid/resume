@@ -15,3 +15,15 @@ hg purge --all
 hg update --clean
 ```
 
+
+## how to remove a lock from mercurial
+```
+You must delete one of those.
+
+# the main one is this
+rm .hg/store/lock
+
+rm .hg/wlock
+rm .hg/store/phaseroots 
+
+```
