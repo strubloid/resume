@@ -47,5 +47,7 @@ SELECT *
  WHERE country_id = 'IE'
 
 
-
+# how to get category attributes
+select * from eav_attribute
+where entity_type_id = 3
 

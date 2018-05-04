@@ -68,3 +68,29 @@ $newOrderEmail->save();
 
 $installer->endSetup();
 ```
+
+# how to create a magento checkbox field
+> https://magento.stackexchange.com/questions/115549/add-checkbox-field-with-catalog-category
+```
+$installer->addAttribute("catalog_category", "test",  array(
+    "type"     => "int",
+    "backend"  => "",
+    "frontend" => "",
+    "label"    => "test",
+    "input"    => "checkbox",
+    "class"    => "",
+    "global"   => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_STORE,
+    "visible"  => true,
+    "required" => false,
+    "user_defined"  => false,
+    "default" => "0",
+    "searchable" => false,
+    "filterable" => false,
+    "comparable" => false,
+
+    "visible_on_front"  => false,
+    "unique"     => false,
+    "note"       => ""
+
+    ));
+```
