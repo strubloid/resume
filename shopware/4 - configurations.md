@@ -1,8 +1,5 @@
 # shopware
 
-# stoped at video?
-https://www.udemy.com/developer-training-basic-english/learn/v4/t/lecture/9057592?start=0
-
 
 # install shopware
 
@@ -12,4 +9,7 @@ wget http://releases.s3.shopware.com.s3.amazonaws.com/install_5.4.2_2463755ef7e8
 ```
 ## export the installer into our webroot
 tar -zvcf 
+
+## shortcuts
+* swconfig: if you do this on phpstorm, this will provide a **basic configuration** for the **config.php** file.
 

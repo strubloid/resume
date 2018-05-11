@@ -46,10 +46,14 @@ b?at = boat or brat, because the second letter can be any letter so b[o]at and b
 ```
 
 
-
-
-
-
+# how to move a panel from left monitor to right
+```
+Right-click the panel you wish to move and select “Properties”.
+Uncheck the “Expand” option under the “General” tab.
+Grab one of the edges of the panel by clicking on the left or right end (top or bottom end for vertical panels).
+Drag the bar to the desired screen and position.
+Check the “Expand” option in the “Panel Properties” window and click “Close”.
+```
 
 
 

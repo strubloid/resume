@@ -11,3 +11,8 @@ if(($j(window).width() < 768 && $j(window).height() < 1024 ) || ($j(window).widt
 
 }
 ```
+
+# how to get the window sizes in console tab
+```
+console.log('Your screen resolution is ' + screen.width + 'x' + screen.height);
+```
