@@ -8,3 +8,6 @@
 
 ## config_dev.php
 > this is the file that will have the **dev environments** that will be ignored by git, so you will be able to have your local configurations in this file, making the live site uses only the Config.php, separating files and organizing the configuration structure.
+
+## plugin.xml
+> default plugin configuration

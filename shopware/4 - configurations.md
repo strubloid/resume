@@ -1,15 +1,17 @@
-# shopware
+# cofigurations
 
+This part you will learn how to configure a different config.php, a development version, with a purpose or difference between live and your local enviroment you must create a new config file, lets call it config_dev.php.
 
-# install shopware
-
-## download the package
+How can we do this?
+* copy the config.php: 
 ```
-wget http://releases.s3.shopware.com.s3.amazonaws.com/install_5.4.2_2463755ef7e8f738a6b1089e5d936dc27284a40a.zip?_ga=2.204337945.867589714.1524232899-257004647.1518781334
+$> cp config.php config_dev.php
 ```
-## export the installer into our webroot
-tar -zvcf 
+* Edit the file **.htaccess**, uncommenting those lines:
+```
+# Development environment
+#SetEnvIf Host "dev.shopware.in" SHOPWARE_ENV=dev
+SetEnv SHOPWARE_ENV dev                              <----  that's the line that you should uncomment
+```
 
-## shortcuts
-* swconfig: if you do this on phpstorm, this will provide a **basic configuration** for the **config.php** file.
 
