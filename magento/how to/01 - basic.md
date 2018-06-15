@@ -94,3 +94,13 @@ $installer->addAttribute("catalog_category", "test",  array(
 
     ));
 ```
+
+# how to get the actual date
+```
+Mage::getModel('core/date')->gmtDate('Y-m-d H:i:s')
+```
+
+
+
+
+
