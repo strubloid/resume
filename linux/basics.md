@@ -56,7 +56,10 @@ Check the “Expand” option in the “Panel Properties” window and click “
 ```
 
 
-
+# how to check if a lib it is installed
+```
+ldconfig -p | grep [name-of-the-lib]
+```
 
 
 
