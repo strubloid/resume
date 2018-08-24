@@ -132,6 +132,13 @@ rafael2.txt:[rafael]: password123456
 1. Notice that tou have [**rafael**] being **bold**, because that is what you were looking for
 2. Also you have all the files that we match with the pattern **rafael**\* (rafael1.txt and rafael2.txt)
 
+## how to catch more than one word with grep?
+```
+  cat /etc/passwd | grep -E '[regex]'
+```
+> cat /etc/passwd | grep -E 'rafael|strubloid'
+
+
 ## Less
 > This is a command that will help you out reading files, this will open the file and you can use arrow up or down to scroll though the file.
 
