@@ -108,3 +108,12 @@ sudo usermod -aG sudo [user]
 
 ```
 > sudo usermod -aG sudo rafael
+
+# sudo
+
+```
+sudo -l                   # list avaiable commands
+sudo command              # run command as root
+sudo -u [user] command    # run command as [user]
+
+```

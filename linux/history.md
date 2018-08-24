@@ -34,3 +34,9 @@ ls -la rafael
 
 !$    => rafael
 ```
+
+## how to search in the history?
+
+* [ctrl + r] reverse shell history search
+> note: to continue searching keep doing ctrl +r
+> note2: to change things just use the arrows
