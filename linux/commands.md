@@ -144,7 +144,14 @@ rafael2.txt:[rafael]: password123456
 
 
 
+pgrep java 
+searching all process that matches java, as elasetic search is made in java 
 
+iotop -u elasticsearch
+check if the process by the user elasticsearch is writing in the disk
+
+htop -p 2484 2838
+it is a way to see only the process from the pgrep java return
 
 
 
