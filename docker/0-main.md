@@ -43,7 +43,8 @@ Registry -> "download the image..." -> Engine(Docker Host) -> "bring the contain
 ```
 > Note: IMAGE ID, if you need to refer this number you only need to use the first 5 characters
 
-
+# image id or name
+> if you need to refer an image you can do copying the image id or only the first 5 characters of it, or you always can try to use the name of the container to refer as well.
 
 # docker run [options][image][command][args]
 > command to create a container

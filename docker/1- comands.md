@@ -116,6 +116,38 @@
     
 ```
 
+# docker image history [options] [id or name of the container]
+> this will show all changes of a container, all the steps that is running to build this container
+
+# docker commit [options] [container id or name] [repository_name]:[repository_tag]
+> this is the command to save changes from a container into another container with the changes
+
+``` 
+    Example: how to install nvm into a container
+    
+    1. go to your conatainer shell and install the nvm, and you should make all the configurations of versions and anything that you need inside of this container
+    2. go to your terminal in your pc and make a "docker commit" to save those changes
+    3. check that we have a new image doing: docker images 
+    
+    Extra knoledge: imagine that all the containers were stopped and somebody made a docker container prune to clean all containers
+    1. stop all containers with the command: docker stop $(docker container ls -aq)
+    2. prune all containers with the command: docker container prune (this will have a question that you must reply with Y)
+    3. check your image that you will use: docker images
+    4. run the new image that you have installed things, in my case: docker run -d -v $(pwd):/workspace -p 8182:8181 rafa_node:1.0 --auth rafael:rafa1234
+    5. check the new version of it in the brownser or entering into ssh of the container (your choice :) ) 
+```
+
+# docker container ls 
+> this will show all active containers
+
+# docker container ls -a
+> this will show all containers active or not
+
+# docker container ls -aq
+> this will list all containers id's
+
+# docker stop $(docker container ls -aq)
+> this will stop all containers 
 
 # docker network [dis]connect
 
