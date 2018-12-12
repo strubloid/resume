@@ -87,3 +87,15 @@ git pull --all
 ```
 git branch -r
 ```
+
+# i cant see my sshkey working for a push, why?
+```
+	// open the git config file
+
+	vim .git/config
+
+	// check that might be the url using instead of th .git file
+	[remote "origin"]
+        # url = https://github.com/strubloid/resume
+        url = git@github.com:strubloid/resume.git
+```
