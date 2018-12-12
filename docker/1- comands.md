@@ -116,6 +116,12 @@
     
 ```
 
+# docker run process didnt started on my boot, what should I do?
+> Easy, you should add the param --restart=always, this will provide that when a server restart, this will be restarted as well.
+``` 
+    docker run --name mysql --restart=always [...rest of the instruction...]
+```
+
 # docker image history [options] [id or name of the container]
 > this will show all changes of a container, all the steps that is running to build this container
 
@@ -136,6 +142,8 @@
     4. run the new image that you have installed things, in my case: docker run -d -v $(pwd):/workspace -p 8182:8181 rafa_node:1.0 --auth rafael:rafa1234
     5. check the new version of it in the brownser or entering into ssh of the container (your choice :) ) 
 ```
+# docker container images
+> this will show all images in your docker
 
 # docker container ls 
 > this will show all active containers
@@ -151,8 +159,10 @@
 
 # docker network [dis]connect
 
-
-
+# docker exec [id or name of the container ] ip a
+> this will show the configuration of the network from the container, to get the ip from the container that will be available to see from outside
 
 # docker network rm [id of the nertowk]
 > this will remove a network
+
+
