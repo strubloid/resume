@@ -1,35 +1,5 @@
 # Container main commands
 
-## how to see all images in the current system?
-```
-	docker images
-
-	REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-	hello-world         latest              4ab4c602aa5e        3 months ago        1.84kB
-	
-```
-> note: this will show you all the images installed in the current machine
-
-## how to get all images ID?
-```
-	docker images -q
-	4ab4c602aa5e
-```
-
-## how to delete all images?
-1. First you must list all images ids: docker images -q
-2. You must to add those elements into a container that docker will do multiple things on it: $([here will be put an array of ids])
-3. After those parts you must run the docker rmi to remove them
-```
-	docker rmi $(docker images -q)
-
-	Untagged: hello-world:latest
-	Untagged: hello-world@sha256:0add3ace90ecb4adbf7777e9aacf18357296e799f81cabc9fde470971e499788
-	Deleted: sha256:4ab4c602aa5eed5528a6620ff18a1dc4faef0e1ab3a5eddeddb410714478c67f
-	Deleted: sha256:428c97da766c4c13b19088a471de6b622b038f3ae8efa10ec5a37d6d31a2df0b
-
-```
-
 ## how to list all active containers?
 ```
 	docker container ls 
@@ -340,6 +310,64 @@ note: as you can see the command **docker exec** will run a command inside of a 
 ```
 > note: this will try to load from a local image first, and later on that will be trying to load from dockerhub (main repository of images from docker)
 
+
+# Containers applications
+
+## how to create a new image with changes by another image base?
+1. you must start a container
+2. make changes inside of this container
+3. persist the data on a new container
+4. run the new container
+
+```
+	// starting a container 
+	docker exec -it ubuntu bash
+
+	// trying to load a vim, but in the ubuntu image **we dont have vim by default**
+	root@0383c89f7bde:/# vim rafael        
+	bash: vim: command not found
+
+	// installing the vim
+	root@0383c89f7bde:/# apt update && apt install vim -y
+
+	// checking that now it is installed
+	root@0383c89f7bde:/# vim --version | grep "VIM - Vi"
+	VIM - Vi IMproved 8.0 (2016 Sep 12, compiled Apr 10 2018 21:31:58)
+
+	// after leave the bash with ctrl+c you must check the id of the container that you were changing things
+	docker container ls -a
+	CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+	0383c89f7bde        ubuntu              "bash"              7 minutes ago       Exited (0) 18 seconds ago                       gifted_bhaskara
+
+
+	// now we must persist the changes into a new container with the VIM installed on it
+	docker commit -m "new instance of ubuntu with VIM on it" -a "rafael mendes" 9c7cf253396d ubuntu/rafael:1.0 
+
+	// now listing the new image that i just added
+	docker images 
+	
+	REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+	ubuntu/rafael       1.0                 bfdd311be1d2        About a minute ago   170MB
+	ubuntu              latest              93fd78260bd1        3 weeks ago          86.2MB
+
+	// showing all the containers that we have
+	docker container ls -a
+	
+	CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+	9c7cf253396d        ubuntu              "/bin/bash"         3 hours ago         Exited (0) 17 seconds ago                       frosty_kowalevski
+
+	// deleting this container with changes
+	docker container rm 9c7cf253396d	
+
+	// start a new container by the new image **ubuntu/rafael**
+	docker run -it ubuntu/rafael:1.0 bash
+
+	// checking that we have the VIM in this image that we just built
+	root@36f7b7c75fe1:/# vim --version | grep "VIM - Vi"
+	VIM - Vi IMproved 8.0 (2016 Sep 12, compiled Apr 10 2018 21:31:58)
+
+```
+note: as you can see the process of commit of changes into a **container** with **commit** command will provide a new image with all the changes on it
 
 
 
