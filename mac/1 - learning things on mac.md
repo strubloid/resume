@@ -73,7 +73,13 @@
 	* click to the first textbox to **setup a shortcut** and press alt + right(->)
 	* choosed action: Send escape sequence
 	* add: f
-
-  
+* Setup word delete
+	* word delete: click + to add a new shortcut
+	* choose action: **send hex code**
+	* add: 0x17
+* setup line delete
+	* word delete: click + to add a new shortcut
+	* choose action: **send hex code**
+ 	* add: 0x15 
 
 
