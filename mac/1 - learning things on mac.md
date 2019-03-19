@@ -56,3 +56,24 @@
 5. Ctrl + Alt + Right = 1/3 to the right side of the screen
 6. Ctrl + Shift + Alt + Right = Moves the Window little by little to the right side of the screen
 7. Ctrl + Shift + Alt + Left = Moves the Window little by little to the left side of the screen
+
+# Iterm2 
+
+## how to setup jump foward and bacwards
+> source: ```https://medium.com/@jonnyhaynes/jump-forwards-backwards-and-delete-a-word-in-iterm2-on-mac-os-43821511f0a```
+
+* go to: iTerm2 > Preferences > Profiles > Keys
+* Setup backwards
+	* backwards: click + to add a new shortcut
+	* click in the first textbox to **setup a shortcut** and press alt + left(<-)
+	* choosed action:  Send escape sequence
+	* add: b
+* Setup forward
+	* foward: click + to add a new shortcut
+	* click to the first textbox to **setup a shortcut** and press alt + right(->)
+	* choosed action: Send escape sequence
+	* add: f
+
+  
+
+

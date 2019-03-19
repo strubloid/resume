@@ -4,3 +4,6 @@
 
 # git
 .gitignore.swp
+
+# general
+.DS_Store
