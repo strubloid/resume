@@ -65,3 +65,20 @@ bin/magendo dev:urn-catalog:generate .idea/misc.xml
       FROM setup_module
      WHERE module = "Rafael_Project"
  ```
+ 
+# types of modules scripts 
+1. InstallData and InstallSchema scripts, which are executed the first time a module is installed.
+2. UpgradeData and UpgradeSchema incremental scripts, which supplement an existing module schema.
+3. Recurring scripts, which are executed each time you install or upgrade Magento.
+
+
+# Reverting data patches
+> Magento does not allow you to revert a particular module data patch. However, you can revert all composer installed 
+> or non-composer installed data patches using the module:uninstall command.
+```bash
+    # Run the following command to revert all composer installed data patches:
+    bin/magento module:uninstall Vendor_ModuleName
+    
+    # Run the following command to revert all non-composer installed data patches:
+    bin/magento module:uninstall --non-composer Vendor_ModuleName
+```
