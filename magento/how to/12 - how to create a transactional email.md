@@ -19,3 +19,5 @@
 </template>
 ```
 > you must change where is [project] to have the name of the project that you are working on.
+
+# [Magento install dir]/app/locale/en_US/template/email/html/header.

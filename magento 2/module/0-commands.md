@@ -29,3 +29,7 @@ Module is enabled
 ```
 bin/magento setup:upgrade
 ```
+
+```
+bin/magento setup:db-declaration:generate-whitelist --module-name="Monsoon_Beer"
+```

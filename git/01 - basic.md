@@ -99,3 +99,8 @@ git branch -r
         # url = https://github.com/strubloid/resume
         url = git@github.com:strubloid/resume.git
 ```
+
+# how can i remove a folder that is being recentrly added to the .gitignore
+```
+git rm -r --cached [folder-name]
+```
