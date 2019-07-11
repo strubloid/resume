@@ -82,3 +82,20 @@ bin/magendo dev:urn-catalog:generate .idea/misc.xml
     # Run the following command to revert all non-composer installed data patches:
     bin/magento module:uninstall --non-composer Vendor_ModuleName
 ```
+
+## how to rebuild the static folder?
+```bash
+     php bin/magento setup:static-content:deploy -f
+```
+> note: this is for developer mode only
+
+## how to check if you screw up with any class?
+```bash
+    php bin/magento setup:di:compile
+```
+
+## how to generate all static and di elements?
+```bash
+    php bin/magento deploy:mode:set production 
+```
+> note: you can use **php bin/magento setup:static-content:deploy** without the **-f** as production mode isn't required

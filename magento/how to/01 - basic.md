@@ -101,6 +101,9 @@ Mage::getModel('core/date')->gmtDate('Y-m-d H:i:s')
 ```
 
 
-
+# how to print a template inside of a phtml?
+```php
+    <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('recaptcha/block.phtml')->toHtml(); ?>
+```
 
 
