@@ -52,3 +52,6 @@
 ```bash
     bin/magento setup:db-declaration:generate-patch [options] <module-name> <patch-name>
 ```
+
+bin/magento setup:install --base-url=https://magento2.test/ --db-host=database --db-name=magento --db-user=root --db-password=root --admin-firstname=Magento --admin-lastname=Team --admin-email=magentoteam@monsoonconsulting.com --admin-user=admin --admin-password=rafa1234 --language=en_IE --currency=EUR --timezone=Europe/Dublin --use-rewrites=1 --backend-frontname="admin" --cache-backend=redis --cache-backend-redis-server=redis --cache-backend-redis-db=0 --session-save=redis --session-save-redis-host=redis --session-save-redis-log-level=3 --session-save-redis-db=1 --http-cache-hosts=varnish:80
+bin/magento deploy:mode:set production #or deploy:mode:set developer

@@ -2,6 +2,6 @@
 * go to terminal
 * run the following command
 ```
-    bin/magento admin:user:create --admin-user="admin" --admin-password="123123q" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin"
+    bin/magento admin:user:create --admin-user="rafael" --admin-password="rafa1234" --admin-email="rafael.mendes@monsoonconsulting.com" --admin-firstname="rafael" --admin-lastname="mendes"
 ```
 
