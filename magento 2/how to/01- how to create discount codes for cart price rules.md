@@ -1,6 +1,4 @@
 # How to create discount rules?
-
-
 * set the cart rule for the wholesale discount 5%, 10%,15%
 * We set the rules as we normally we would, you can see them here:
   * ID list: 48, ID 47 and ID 49 
