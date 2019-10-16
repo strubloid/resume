@@ -376,3 +376,56 @@ note: as you can see the process of commit of changes into a **container** with 
 
 
 
+<style>
+    .featured-product-slider .pdt-image img {
+        width: 238px;
+        height: 238px;
+    }
+
+    .featured-product-slider .product-title-info {
+        height: 110px;
+    }
+</style>
+<script type="text/javascript">
+
+    var myTitle = "Most Popular Right Now";
+    
+    var prods2 = {
+        'products' : [
+            #foreach($product in $products)
+            {
+                "id" : "$!product.productId",
+                "img" : "$!product.thumb(2)",
+                'url' : "$!product.url.escapeJsonString()",
+                'name' : "$!product.name.escapeJsonString()",
+                'price' : "$!product.price",
+            },
+            #end
+        ]};
+    
+    prods2.title = myTitle;
+    prods2.slidernumber=2;
+
+
+    // Loading  Jquery
+    var _j2 = _targetWindow.jQuery;
+
+    _j2.ajax({
+        url: 'nostorequest/homepage/buildHomepageFeaturedProducts',
+        dataType:'json',
+        contentType: "application/json;charset=utf-8",
+        data: prods2,
+        success: function (data, textStatus, jqXHR) {
+            _j2('#frontpage-nosto-2').append(data);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+        },
+    });
+
+
+</script>
+
+
+_targetWindow.jQuery(_targetWindow.document).ready(function(){ // HERE // })

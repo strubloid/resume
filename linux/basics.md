@@ -61,5 +61,9 @@ Check the “Expand” option in the “Panel Properties” window and click “
 ldconfig -p | grep [name-of-the-lib]
 ```
 
-
+### TODO: Fix this!
+## How to curl things, that you need username and password
+```
+ curl -sIk https://woodies:uKNwLNfDQ6\*FGS5mdtAY@qa.woodies.ie/25kg-paving-slab-sand-1027430
+```
 
