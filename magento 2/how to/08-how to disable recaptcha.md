@@ -10,3 +10,11 @@
 4. Google Recaptcha
 > Now you will be able to expand backend and frontned area and say yes or no for those
 configurations.
+
+
+## Localhost test keys
+```
+Website Key: 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+API Secret: 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
+```
+

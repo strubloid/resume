@@ -99,3 +99,9 @@ bin/magendo dev:urn-catalog:generate .idea/misc.xml
     php bin/magento deploy:mode:set production 
 ```
 > note: you can use **php bin/magento setup:static-content:deploy** without the **-f** as production mode isn't required
+
+
+## run in console
+```
+PHP_IDE_CONFIG="serverName=_default" php bin/magento info:dependencies:show-framework
+```
