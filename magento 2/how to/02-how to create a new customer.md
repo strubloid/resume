@@ -38,3 +38,29 @@
        SET `password_hash` = CONCAT(SHA2('xxxxxxxxrafa1234', 256), ':xxxxxxxx:1')
      WHERE `entity_id` = '362';
 ```
+
+### How to unlock the user?
+* Todo: isn't right, check it again
+1 - Search your user on customer_entity
+```mysql
+    SELECT * 
+      FROM customer_entity
+     WHERE email like "%@monsoonconsulting.com%"
+```
+2 - check that it is clean the column **lock_expires**
+3 - add a date bigger than today's date: ```2029-01-20 12:35:19```
+4 - save
+
+### how to disable the customer confirmation for localhost?
+* select command
+```mysql
+SELECT * 
+  FROM core_config_data
+ WHERE path like "%customer/create_account/confirm%"
+```
+* upgrade command
+```mysql
+ UPDATE core_config_data
+    SET value = 0
+ WHERE path like "%customer/create_account/confirm%"
+```
