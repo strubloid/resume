@@ -165,4 +165,3 @@
 # docker network rm [id of the nertowk]
 > this will remove a network
 
-
