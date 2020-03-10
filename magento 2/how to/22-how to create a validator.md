@@ -1,432 +1,192 @@
 # How to create a validator
 
 
-## Main folders
-* module folder: app/code/Centralbank/Validator
-* layout: [module-folder]/view/frontend/layout/checkout_index_index.xml
-* rules: [module-folder]/view/frontend/web/js/model/realex-address-rules.js
-* validator: [module-folder]/view/frontend/web/js/model/realex-address-validator.js
-* pool: [module-folder]/view/frontend/web/js/model/realex-address-validations.js
+## Main files/folders
+* Module folder: app/code/Centralbank/Validator
+* Javascript path: [module-folder]/Validator/view/frontend/web/js
+* Requirejs: [module-folder]/Validator/view/frontend/requirejs-config.js
+* Our validator: [module-folder]/Validator/view/frontend/web/js/address-size-validation-mixin.js
+* checkout layout: [module-folder]/view/frontend/layout/checkout_index_index.xml
 
-### create rules
+### Require Js
+* This file will contain instructions to add javascript into our website
 ```javascript
-define(
-    [],
-    function () {
-        'use strict';
-        return {
-            getRules: function() {
-                return {
-                    'invalid': {
-                        'characters': 'º'
-                    }
-                };
-            }
-        };
-    }
-)
-```
-
-### Create a validator
-```javascript
-define(
-    [
-        'jquery',
-        'mageUtils',
-
-        './shipping-rates-validation-rules',
-        'mage/translate'
-    ],
-    function ($, utils, validationRules, $t) {
-        'use strict';
-        return {
-            validationErrors: [],
-            validate: function(address) {
-                var self = this;
-                this.validationErrors = [];
-                $.each(validationRules.getRules(), function(field, rule) {
-                    if (rule.required && utils.isEmpty(address[field])) {
-                        var message = $t('Field ') + field + $t(' is required.');
-                        self.validationErrors.push(message);
-                    }
-                });
-                return !Boolean(this.validationErrors.length);
-            }
-        };
-    }
-);
-```
-
-### Register validator and Rules in the validators pool
-```javascript
-define(
-    [
-        'uiComponent',
-        'Magento_Checkout/js/model/shipping-rates-validator',
-        'Centralbank_Validator/js/model/realex-address-validator'
-
-    ],
-    function (Component, defaultShippingRatesValidator, yourValidator) {
-        'use strict';
-        defaultShippingRatesValidator.registerValidator(yourValidator);
-        return Component.extend({});
-    }
-);
-
-```
-
-
-
-## How the search for the correct form?
-1 - you always can try to use the n98-magerun2.phtml dev:template-hints to know what is the phtml file of that template
-1.1 - if you cant find, what you can do is: inspect the element, get the main id of the form like form-shipping-address
-1.2 - you can find that we have this id only: vendor/magento/module-checkout/view/frontend/web/template/shipping-address/form.html
-
-
-### Magento_Checkout/js/model/shipping-rates-validator
-* locale: vendor/magento/module-checkout/view/frontend/web/js/model/shipping-rates-validator.js
-* alias: Magento_Checkout/js/model/shipping-rates-validator
-  * Magento_Checkout: vendor/magento/module-checkout
-  * js/model: view/frontend/web/js/model
-  * shipping-rates-validator: shipping-rates-validator.js
-
-### app/code/Centralbank/Validator/view/frontend/layout/checkout_index_index.xml
-1 - you must search for the main checkout_index_index template file
-2 - for the checkout_index_index we can find over: vendor/magento/module-checkout/view/frontend/layout/checkout_cart_index.xml
-3 - you should copy this file and remove all the unecessary things til the form that you want to change, like
-
-#### Changes
-
-##### Block to ReferenceBlock tag
-* each block you must change from <block> to <referenceBlock name="[block-name]">
-```xml
- <!-- From-->
- <block clas="Magento\Checkout\Block\Onepage" name="checkout.root" template="Magento_Checkout::onepage.phtml" cacheable="false">
-
- <!-- To-->
- <referenceBlock name="checkout.root">
-```
-
-##### Remove uncessesary items
-* You can remove any kind of item that you wont be changing
-* the structure must look like items over items, like above example:
-```xml
-    <!--from-->
-    <arguments>
-        <argument name="jsLayout" xsi:type="array">
-            <item name="components" xsi:type="array">
-                <item name="checkout" xsi:type="array">
-                    <item name="children" xsi:type="array">
-                        <item name="steps" xsi:type="array">
-        This must die -->   <item name="component" xsi:type="string">uiComponent</item>
-        This must die -->   <item name="displayArea" xsi:type="string">steps</item>
-                            <item name="children" xsi:type="array">
-                                <item name="shipping-step" xsi:type="array">
-            This must die -->       <item name="component" xsi:type="string">uiComponent</item>
-            This must die -->       <item name="sortOrder" xsi:type="string">1</item>
-                                    <item name="children" xsi:type="array">
-                                        <item name="shippingAddress" xsi:type="array">
-                                            <item name="config" xsi:type="array">
-    
-    
-    
-    <!--to-->
-    <arguments>
-        <argument name="jsLayout" xsi:type="array">
-            <item name="components" xsi:type="array">
-                <item name="checkout" xsi:type="array">
-                    <item name="children" xsi:type="array">
-                        <item name="steps" xsi:type="array">
-                            <item name="children" xsi:type="array">
-                                <item name="shipping-step" xsi:type="array">
-                                    <item name="children" xsi:type="array">
-                                        <item name="shippingAddress" xsi:type="array">
-                                            <item name="config" xsi:type="array">
-
-```
-* This is a good sample of the checkout shipment form
-```xml
-<?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <body>
-        <referenceContainer name="content">
-            <referenceBlock name="checkout.root">
-                <arguments>
-                    <argument name="jsLayout" xsi:type="array">
-                        <item name="components" xsi:type="array">
-                            <item name="checkout" xsi:type="array">
-                                <item name="children" xsi:type="array">
-                                    <item name="steps" xsi:type="array">
-                                        <item name="children" xsi:type="array">
-                                            <item name="shipping-step" xsi:type="array">
-                                                <item name="children" xsi:type="array">
-                                                    <item name="shippingAddress" xsi:type="array">
-                                                        <item name="children" xsi:type="array">
-                                                            <item name="shipping-address-fieldset" xsi:type="array">
-                                                                <item name="children" xsi:type="array">
-                                                                    <!-- The following items override configuration of corresponding address attributes -->
-                                                                    <item name="region" xsi:type="array">
-                                                                        <!-- Make region attribute invisible on frontend. Corresponding input element is created by region_id field -->
-                                                                        <item name="visible" xsi:type="boolean">false</item>
-                                                                    </item>
-                                                                    <item name="region_id" xsi:type="array">
-                                                                        <item name="component" xsi:type="string">Magento_Ui/js/form/element/region</item>
-                                                                        <item name="config" xsi:type="array">
-                                                                            <item name="template" xsi:type="string">ui/form/field</item>
-                                                                            <item name="elementTmpl" xsi:type="string">ui/form/element/select</item>
-                                                                            <item name="customEntry" xsi:type="string">shippingAddress.region</item>
-                                                                        </item>
-                                                                        <item name="validation" xsi:type="array">
-                                                                            <item name="required-entry" xsi:type="boolean">true</item>
-                                                                        </item>
-                                                                        <!-- Value of region_id field is filtered by the value of county_id attribute -->
-                                                                        <item name="filterBy" xsi:type="array">
-                                                                            <item name="target" xsi:type="string"><![CDATA[${ $.provider }:${ $.parentScope }.country_id]]></item>
-                                                                            <item name="field" xsi:type="string">country_id</item>
-                                                                        </item>
-                                                                    </item>
-                                                                    <item name="postcode" xsi:type="array">
-                                                                        <!-- post-code field has custom UI component -->
-                                                                        <item name="component" xsi:type="string">Magento_Ui/js/form/element/post-code</item>
-                                                                        <item name="validation" xsi:type="array">
-                                                                            <item name="required-entry" xsi:type="boolean">true</item>
-                                                                        </item>
-                                                                    </item>
-                                                                    <item name="company" xsi:type="array">
-                                                                        <item name="validation" xsi:type="array">
-                                                                            <item name="min_text_length" xsi:type="number">0</item>
-                                                                        </item>
-                                                                    </item>
-                                                                    <item name="fax" xsi:type="array">
-                                                                        <item name="validation" xsi:type="array">
-                                                                            <item name="min_text_length" xsi:type="number">0</item>
-                                                                        </item>
-                                                                    </item>
-                                                                    <item name="country_id" xsi:type="array">
-                                                                        <item name="sortOrder" xsi:type="string">115</item>
-                                                                    </item>
-                                                                    <item name="telephone" xsi:type="array">
-                                                                        <item name="config" xsi:type="array">
-                                                                            <item name="tooltip" xsi:type="array">
-                                                                                <item name="description" xsi:type="string" translate="true">For delivery questions.</item>
-                                                                            </item>
-                                                                        </item>
-                                                                    </item>
-                                                                </item>
-                                                            </item>
-                                                        </item>
-                                                    </item>
-                                                </item>
-                                            </item>
-                                        </item>
-                                    </item>
-                                </item>
-                            </item>
-                        </item>
-                    </argument>
-                </arguments>
-            </referenceBlock>
-        </referenceContainer>
-    </body>
-</page>
-
-```
-
-
-
-<item name="shipping-rates-validation" xsi:type="array">
-                                                            <item name="children" xsi:type="array">
-                                                                <item name="realex-address-validation" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Centralbank_Validator/js/view/realex-address-validation</item>
-                                                                </item>
-                                                            </item>
-                                                        </item>
-
-
-shipping-address/form.html
-
-
-<?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <body>
-        <referenceContainer name="content">
-                <referenceBlock name="checkout.root">
-                    <arguments>
-                        <argument name="jsLayout" xsi:type="array">
-                            <item name="components" xsi:type="array">
-                                <item name="checkout" xsi:type="array">
-                                    <item name="children" xsi:type="array">
-                                        <item name="steps" xsi:type="array">
-                                            <item name="children" xsi:type="array">
-                                                <item name="shipping-step" xsi:type="array">
-                                                    <item name="children" xsi:type="array">
-                                                        <item name="shippingAddress" xsi:type="array">
-                                                            <item name="children" xsi:type="array">
-                                                                <item name="shipping-address-fieldset" xsi:type="array">
-                                                                    <item name="children" xsi:type="array">
-                                                                        <item name="telephone" xsi:type="array">
-                                                                            <item name="validation" xsi:type="array">
-                                                                                <item name="validate-number" xsi:type="number">0</item>
-                                                                            </item>
-                                                                            <item name="config" xsi:type="array">
-                                                                                <item name="tooltip" xsi:type="array">
-                                                                                    <item name="description" xsi:type="string" translate="true">For delivery questions.</item>
-                                                                                </item>
-                                                                            </item>
-                                                                        </item>
-                                                                    </item>
-                                                                </item>
-                                                            </item>
-                                                        </item>
-                                                    </item>
-                                                </item>
-                                            </item>
-                                        </item>
-                                    </item>
-                                </item>
-                            </item>
-                        </argument>
-                    </arguments>
-                </referenceBlock>
-        </referenceContainer>
-    </body>
-</page>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Good example for billing and shipping steps
-```xml
-<?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <body>
-        <referenceContainer name="content">
-                <referenceBlock name="checkout.root">
-                    <arguments>
-                        <argument name="jsLayout" xsi:type="array">
-                            <item name="components" xsi:type="array">
-                                <item name="checkout" xsi:type="array">
-                                    <item name="children" xsi:type="array">
-                                        <item name="steps" xsi:type="array">
-                                            <item name="children" xsi:type="array">
-                                                <item name="shipping-step" xsi:type="array">
-                                                    <item name="children" xsi:type="array">
-                                                        <item name="shippingAddress" xsi:type="array">
-                                                            <item name="children" xsi:type="array">
-                                                                <item name="shipping-address-fieldset" xsi:type="array">
-                                                                    <item name="children" xsi:type="array">
-                                                                        <item name="telephone" xsi:type="array">
-                                                                            <item name="validation" xsi:type="array">
-                                                                                <item name="validate-number" xsi:type="number">0</item>
-                                                                            </item>
-                                                                            <item name="config" xsi:type="array">
-                                                                                <item name="tooltip" xsi:type="array">
-                                                                                    <item name="description" xsi:type="string" translate="true">For delivery questions.</item>
-                                                                                </item>
-                                                                            </item>
-                                                                        </item>
-                                                                    </item>
-                                                                </item>
-                                                            </item>
-                                                        </item>
-                                                    </item>
-                                                </item>
-                                                <item name="billing-step" xsi:type="array">
-                                                    <item name="children" xsi:type="array">
-                                                        <item name="payment" xsi:type="array">
-                                                            <item name="children" xsi:type="array">
-                                                                        <item name="telephone" xsi:type="array">
-                                                                            <item name="validation" xsi:type="array">
-                                                                                <item name="validate-number" xsi:type="number">0</item>
-                                                                            </item>
-                                                                        </item>
-                                                            </item>
-                                                        </item>
-                                                    </item>
-                                                </item>
-                                            </item>
-                                        </item>
-                                    </item>
-                                </item>
-                            </item>
-                        </argument>
-                    </arguments>
-                </referenceBlock>
-        </referenceContainer>
-    </body>
-</page>
-
-
-```
-
-
-
-### Create a validator Temp (Remove later)
-```javascript
-define(
-    ['mage/translate', 'Magento_Ui/js/model/messageList'],
-    function ($t, messageList) {
-        'use strict';
-        return {
-            validate: function () {
-                const isValid = false; //Put your validation logic here
-
-                if (!isValid) {
-                    messageList.addErrorMessage({ message: $t('a possible failure message ...  ') });
-                }
-
-                return isValid;
+var config = {
+    config: {
+        mixins: {
+            'mage/validation': {
+                'Centralbank_Validator/js/address-validation-mixin': true,
+                'Centralbank_Validator/js/address-size-validation-mixin': true
             }
         }
     }
-);
+};
 ```
-* Note: this will be responsible to apply the rule
 
+### Validator
+```javascript
 
+define([
+    'jquery',
+], function ($) {
+    'use strict';
+    
+    // This is just to have a value in case that something went wrong with the ajax call
+    var inputMaxSize = 50;
+    
+    // This will trigger the loadinputmaxsize action to load what is the stored data on core_config_data
+    jQuery.ajax({
+        showLoader: true,
+        url: '/validate-load/address/loadinputmaxsize',
+        type: "post",
+        dataType: 'json',
+        contentType: "application/json;charset=utf-8",
+    }).success(function (data, textStatus, jqXHR) {
+        if (data['max-size'] != null) {
+            inputMaxSize = data['max-size'];
+        }
+    });
 
-
-
-
-
+    return function () {
+        $.validator.addMethod(
+            'validate-address-size-realex',
+            function (value, element) {
+                this.errorMessage = $.mage.__(' The maximum size for this field is: ' 
+                    + inputMaxSize + ' characters');
+                return value.length <= inputMaxSize;
+            }, function () {
+                return this.errorMessage;
+            }
+        )
+    }
+});
 ```
-        window.checkoutConfig = <?= /* @noEscape */ $block->getSerializedCheckoutConfig() ?>;
-        
-        window.isCustomerLoggedIn = window.checkoutConfig.isCustomerLoggedIn;
-        window.customerData = window.checkoutConfig.customerData;
-   ```
+
+### Frontend Route validate-load
+* I am showing in this sample how to create a frontend route, so we can get data
+from core_config_data and upgrade dynamically the error message plus the validator
+variable inputMaxSize
+* path: app/code/Centralbank/Validator/etc/frontend/routes.xml
+```xml
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route frontName="validate-load" id="validate">
+            <module name="Centralbank_Validator"/>
+        </route>
+    </router>
+</config>
+```
+
+### Controller Action
+* This will use the variable resultFactory from abstractAction that is a child of Action class that we extend
+* With the resultFactory we can return Json in a correct way
+* path: app/code/Centralbank/Validator/Controller/Address/LoadInputMaxSize.php
+```php
+<?php
+
+namespace Centralbank\Validator\Controller\Address;
+
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\ResultFactory;
+
+class LoadInputMaxSize extends Action
+{
+    /**
+     * @param Context $context
+     */
+    public function __construct(
+        Context $context
+    ) {
+        parent::__construct($context);
+    }
+
+    public function execute()
+    {
+        if ($this->getRequest()->isAjax()) {
+            $result = $this->resultFactory->create(ResultFactory::TYPE_JSON);
+            $response['max-size'] = 60;
+            $result->setData($response);
+            return $result;
+        }
+    }
+}
+```
+
+## Adding validator to a customer attribute
+* Note: It is possible to add a validator to each filed manually going to a template file and add the validator tag
+* Usually we should add to customer attribute by magento patch
+* File path: app/code/Centralbank/Validator/Setup/Patch/Data/UpgradeValidatorCustomerStreetField.php
+```php
+<?php
+
+declare(strict_types=1);
+namespace Centralbank\Validator\Setup\Patch\Data;
+
+use Magento\Framework\Setup\Patch\DataPatchInterface;
+use Magento\Customer\Setup\CustomerSetupFactory;
+use Magento\Framework\Setup\ModuleDataSetupInterface;
+
+class UpgradeValidatorCustomerStreetField implements DataPatchInterface
+{
+    /**
+     * @var ModuleDataSetupInterface
+     */
+    private $moduleDataSetup;
+
+    /**
+     * @var CustomerSetupFactory
+     */
+    private $customerSetupFactory;
+
+    /**
+     * UpgradeValidatorCustomerStreetField constructor.
+     * @param ModuleDataSetupInterface $moduleDataSetup
+     * @param CustomerSetupFactory $customerSetupFactory
+     */
+    public function __construct(
+        ModuleDataSetupInterface $moduleDataSetup,
+        CustomerSetupFactory $customerSetupFactory
+    ) {
+        $this->moduleDataSetup = $moduleDataSetup;
+        $this->customerSetupFactory = $customerSetupFactory;
+    }
+
+    /**
+     * This will return the dependencies.
+     */
+    public static function getDependencies(): array
+    {
+        return [];
+    }
+
+    /**
+     * This will go to eav_attribute and customer_eav_attribute and it will
+     * be adding the validation rules and the classes to be printed in the frontend
+     * {@inheritdoc}
+     */
+    public function apply()
+    {
+        $entityAttributes = [
+            'customer_address' => [
+                'street' => [
+                    'validate_rules' => '{"max_text_length":101,"min_text_length":1}',
+                    'frontend_class' => 'validate-address-realex validate-address-size-realex',
+                ],
+            ],
+        ];
+        $customerSetup = $this->customerSetupFactory->create(['setup' => $this->moduleDataSetup]);
+
+        $customerSetup->upgradeAttributes($entityAttributes);
+    }
+
+    /**
+     * This will return the aliases.
+     */
+    public function getAliases(): array#
+    {
+        return [];
+    }
+}
+```
