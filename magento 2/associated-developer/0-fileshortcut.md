@@ -1,6 +1,6 @@
 # fileshortcut
 
-# Reading page: 20
+# Reading page: 23
 
 ## app/etc/NonComposerComponentRegistration.php
 * This is responsible to add include the registration.php
@@ -37,3 +37,6 @@ a specific route, that is the file to start to check
 ## vendor/magento/framework/App/Router/NoRouteHandler.php
 * this is responsible for all not found routes, so if you are having
 issues with a wrong route or not found one, you can start checking this file
+
+### /home/strubloid/Projects/centralbank/vendor/magento/magento2-base/setup/src/Magento/Setup/Model/Installer.php
+* This file contains good ways to create a new table that you can use on your Schema patch

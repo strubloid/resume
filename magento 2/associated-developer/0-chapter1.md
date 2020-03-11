@@ -162,8 +162,88 @@ if you want to add to the admin part you must add over **/etc/adminhtml/**
 * This is place to put your models
 * Must handle anything related to the data structure
 * Product Model you can find on: **vendor/magento/module-catalog/Model/Product.php**
+* If you want to load data we must use the repository class model, like: **vendor/magento/module-catalog/Model/ProductRepository.php**
 
 
+### /Model/ResourceModel: Database Interactions
+* This represent how data will be retrieved an saved in the database
+* Any database interaction should happen in these files
+* Sample file:  **vendor/magento/module-catalog/Model/ResourceModel/Product.php**
 
+### /Observer: Event Listeners
+* Magento will fire an event, listeners that are attached to that event will be called
+* Magento Commerce integrates with RabbitMQ which allows even more control and reliability to this process
+* Event Listeners must implement the ObserverInterface: **\Magento\Framework\Event\ObserverInterface**
+* An observer class must be understandable as the intent of its function
+* Class must be following the stand of using **CamelCase** and events must be **snake_case**
+* We should avoid to put business logic on an Observer, so you must put the business logic in another location and inject that class into your Observer
 
+### /Plugin: Function Modification
+* Plugins are one of the most powerful features in Magento 2
+* They allow you to modify or change the functionality for almost any class or interface
+* Plugins only work on Objects that are instantiated by the **ObjectManager**
+* Plugins can be placed anywhere, but for convention we place in **/Plugin** folder
+* Naming suggestion is name the plugin after the **class that is being customized** followed by **Plugin**
+
+#### Plugin example
+* Modifying a method in: **\Magento\Catalog\Api\Data\ProductInterface**
+* A class must be created in: **[module-dir]/Plugins/Magento/Catalog/ProductPlugin.php**
+
+### /Setup: Database Modification
+* At this place we will be using patches
+* We will be placing scripts that will be doing:
+  * Installations and upgrade of database schema
+  * Installing and upgrading data
+  * Invoking other operations that are required when magento is installed or upgraded
+* Each patch will be localized at table **patch_list**, so if you need to check/run you must do a select:
+```mysql
+SELECT * 
+  FROM patch_list
+ WHERE patch_name like "%YourPatchName&"
+```
+* We aren't controlled by a version, only by the **patch_list execution**
+
+#### Data patch
+* A class that contains data modification instructions
+* It can have dependencies on other data or schema patches
+
+#### Revertable data patch
+* A data patch that contains a revert()
+* Revert method will provide operations that revert revertable changes caused by the module.
+* Revertable operations are usually related to changes in the database.
+
+#### Migration
+* A type of non-revertable data patch that can be applied, but not reverted.
+* Any complex operation, such as one that contains an application layer (for example, Collections or Serializers) is non-revertable.
+* SQL delete operations are non-revertable because they can cause triggering.
+
+#### Schema patch
+* A class that contains custom schema modification instructions
+* Schema patches are used along with declarative schema
+* Complex operations:
+  * Adding triggers, stored procedures, functions
+  * Performing data migration with inside DDL operations
+  * Renaming tables, columns, and other entities
+  * Adding partitions and options to a table
+
+#### Revertable schema patch
+* It is the same idea of the Schema Patch but now we will have the revert() method
+
+### /Test
+* This is the place for module tests
+* Unit tests are localized at: **/Test/Unit**
+* You can run a test going to a terminal and doing:
+```bash
+  bin/magento dev:tests:run  [all, unit, integration, integration-all, static, static-all, integrity, legacy, default]
+```
+
+### /Ui: Ui Component Data Providers
+* This folder will contain data providers and modifiers for the UI components
+* Will be localized the Layout XML Directives: **/view/[area]/layout**
+* Layout XML links blocks (/Blocks) with templates, this will control what is displayed
+
+### /view/[area]/templates: Block Templates
+* Files over /Block represents the business logic
+* Template files represents how the result of the business logic are shown to the user
+* The best is to have as little as possible of PHP code over those files
 
