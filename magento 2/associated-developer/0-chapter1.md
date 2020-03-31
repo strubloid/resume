@@ -247,3 +247,74 @@ SELECT *
 * Template files represents how the result of the business logic are shown to the user
 * The best is to have as little as possible of PHP code over those files
 
+### /view/adminhtml/ui_component
+* the **template folder** inside will contain template for the ui element
+* this folder contain **xml** configuration files for the **ui component**
+
+### /view/[area]/web
+* This will store web assets
+* js, css, less, scss
+
+### /view/[area]/web/template
+* Contains html templates (that can be asynchronously requested with Javascript)
+* These files often contain KnockoutJS declarative bindings
+
+### /view/[area]/requirejs-config.js
+* This is the place that will have the requirejs-config file
+* This is used to control Javascript Module dependencies
+
+## /etc folder
+* module.xml
+  * module configuration file
+  * this contains the loading order
+* acl.xml
+  * This defines permission for accessing protected resources
+* config.xml
+  * This is related to store -> configurations
+* crontab.xml
+  * this will contain the magento 2 cronjob rules
+* di.xml
+  * This configures the dependency injection of your modules
+  * Plugins are defined here
+  * Class substitutions can be done here
+  * Concrete classes are specified for interfaces
+  * Virtual types setup, and constructor arguments can be specified or modified
+* email_templates.xml
+  * This is a xml file that will contain each email template and the respective template file
+* events.xml
+  * This is responsible to create all events that an observer can observ
+* indexer
+  *  Configure all magento indexes
+  * Check: vendor/magento/module-catalog/etc/indexer.xml
+* adminhtml/menu.xml
+  * Define the admin menu elements
+  * Check: vendor/magento/module-customer/etc/adminhtml/menu.xml
+* mview.xml
+  * This will trigger events when data is modified in a database column
+  * Check:  vendor/magento/module-catalog/etc/mview.xml
+* [area]/routes.xml
+  * this is for the web requests
+  * the route configures the first part of the layout handle (route ID) and the frontname
+* adminhtml/system.xml
+  * Specifies configuration tabs, sections, groups and fields found in Store Configuration.
+  * Check vendor/magento/module-customer/etc/adminhtml/system.xml
+* view.xml
+  * Similar to config.xml but it is used for **specify default values**
+* webapi.xml
+  * Configures API access and routes
+  * Check: : vendor/magento/modulecatalog/etc/webapi.xml
+* widget.xml
+  * This will configure the widget
+  * It can be used in products, CMS pages, and CMS blocks
+  * Check:  vendor/magento/module-catalog/etc/widget.xml
+
+## Dependency Injection
+
+### Points to remember
+* This is a way to give the class the object that is needed by loading in the constructor
+* The ObjectManager makes implementing the Composition over Inheritance principle possible.
+* This makes the test easier
+
+### Magento’s dependency injection approach and architecture
+* Magento uses constructor injection: that is, all of the dependencies are specified as arguments in the __construct() function.
+* Note that it is very poor practice to directly use the ObjectManager—the primary class that handles dependency inject
