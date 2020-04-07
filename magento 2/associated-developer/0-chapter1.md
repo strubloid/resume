@@ -318,3 +318,28 @@ SELECT *
 ### Magento’s dependency injection approach and architecture
 * Magento uses constructor injection: that is, all of the dependencies are specified as arguments in the __construct() function.
 * Note that it is very poor practice to directly use the ObjectManager—the primary class that handles dependency inject
+* Magento DI container holds a list of objects
+* Each time that a new object it is created and instantiated to a module
+ di.xml this is added into the container
+* Unless you clone the object, anywhere you pass the object (as an argument) that
+ same object is referenced.
+
+#### Proxy
+* For objects that might be time intensive to create, Magento provides proxies.
+* A proxy lazy loads the class. To utilize this, **specify a class** like \Magento\Catalog\Model\Product\Proxy **in di.xml**.
+* Proxies **must NOT** be specified in the **__constructor method**.
+
+#### Factory
+* For objects that need to **be new every time** they are used, Magento uses factories.
+* To use a factory, specify the class or interface name and append Factory to the end.
+```
+Like: \Magento\Catalog\Api\Data\ProductInterfaceFactory. 
+1 ) Will search for the reference of ProductInterface
+2 ) Will generate a factory for that class 
+* note: The default place will always be \Magento\Catalog\Model\Product
+```
+* The factory has one public method, create.
+* Calling this method creates a new instance of the desired class.
+* Magento creates these classes automatically. (what command to run?)
+* Check:  vendor/magento/module-paypal/Model/IpnFactory.php.
+

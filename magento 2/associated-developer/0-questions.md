@@ -74,3 +74,7 @@ Q: How can i get one of those widgets(vendor/magento/module-catalog/etc/widget.x
 ## Dependency Injection
 Q: it is very poor practice to directly use the ObjectManager—the primary class that handles dependency inject.
 Q: How can I do that? How can I recognize that ?
+
+
+## Factory
+Q: To be able to create a ProductInterfaceFactory, what is the command that we need to run to make magento create it?
