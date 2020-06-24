@@ -1,5 +1,11 @@
 # History
 
+## Previous Knowledge
+> The $ sign stands for the termninal line, you will be using this on the terminal called **Developer Command Prompt for VS 2019**, and you will see something like:
+```bash
+ $ [this is a part of the code, you shouldn\'t add the first $]
+``` 
+
 ## Windows issue
 
 ### Cant see the compiler (cl)
