@@ -51,6 +51,7 @@ Note: You will notice that you can change the X and Y coordinates, but things ar
 ![Texture U and V](../images/03-u-v-texture-scales.png)
 
 ## Results in the Material Instance
-Now you can go to the **material Instance** and check that we have 2 new parameters! U and V.
+Now you can go to the **material Instance** and check that we have 2 new parameters! U and V:
 ![Texture U and V](../images/04-u-v-texture-scales.png)
-Note: if you change this parameter and check the results in the main editor, you will be able to see that its showing the preview in a live environment, so much faster than before!
+
+> Note: if you change this parameter and check the results in the main editor, you will be able to see that its showing the preview in a live environment, so much faster than before!
