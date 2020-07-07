@@ -2,7 +2,7 @@
 
 ## Nomenclature
 * [project-root]: this is the folder that you have your project, like:
-```shell
+```Shell
     # For windows users
     c:/Games
 
@@ -13,7 +13,7 @@ Note: for linux/mac users the character **~** means the user folder, if my user 
 
 ## Basic structure of a module
 So for this explanation I will be using the folder **~/Games/Newgame**:
-```shell
+```Shell
     # You must create the module folder
     $ mkdir Mymodule
 
@@ -31,7 +31,7 @@ So for this explanation I will be using the folder **~/Games/Newgame**:
 > **Path** /home/rafa/Games/Newgame/Mymodule <br />
 > **File** /home/rafa/Games/Newgame/Mymodule/**Mymodule.h**
 
-<pre><code class="cpp">
+```bash
     #pragma once
 
     #include "CoreMinimal.h"
@@ -40,24 +40,24 @@ So for this explanation I will be using the folder **~/Games/Newgame**:
     {
         UE_LOG(LogTemp, Error, TEXT("TESTTTT RAFAEL"));
     }
-</code></pre>
+```
 
 ### Step2 - Crating the Mymodule.cpp
 > **Path** /home/rafa/Games/Newgame/Mymodule <br />
 > **File** /home/rafa/Games/Newgame/Mymodule/**Mymodule.cpp**
 
-<pre> <code class="cpp">
+```Shell
     #include "Mymodule.h"
     #include "Modules/ModuleManager.h"
 
     IMPLEMENT_GAME_MODULE(FDefaultGameModuleImpl, Mymodule);
-</code></pre>
+```
 
 ### Step3 - Crating the Mymodule.Build.cs
 > **Path** /home/rafa/Games/Newgame/Mymodule <br />
 > **File** /home/rafa/Games/Newgame/Mymodule/**Mymodule.Build.cs**
 
-<pre> <code class="cpp">
+```bash
     using UnrealBuildTool;
 
     public class Mymodule : ModuleRules
@@ -71,14 +71,15 @@ So for this explanation I will be using the folder **~/Games/Newgame**:
             PrivateDependencyModuleNames.AddRange(new string[] {  });
         }
     }
-</code></pre>
+```
 
 ## How to load this new module?
 * You will need to change the **Newgame.Target.cs** and **NewgameEditor.Target.cs**
 * Both are localized at **/home/rafa/Games/Newgame**
 
 ### Step4 - Changing the Newgame.Target.cs
-<pre><code class="cpp">
+
+```bash
 using UnrealBuildTool;
 using System.Collections.Generic;
 
@@ -91,23 +92,24 @@ public class Building_EscapeTarget : TargetRules
 		ExtraModuleNames.AddRange( new string[] { "Newgame", "Mymodule" } );
 	}
 }
-</code></pre>
+```
+
 > This is the final result, I only added **Mymodule** to load
 
 #### Changes
 
 ##### From
-<pre><code class="cpp">
+```bash
     ExtraModuleNames.AddRange( new string[] { "Newgame"} );
-</code></pre>
+```
 ##### To
-<pre><code class="cpp">
+```bash
     ExtraModuleNames.AddRange( new string[] { "Newgame", "Mymodule" } );
-</code></pre>
+```
 
 
 ### Step5 - Changing the NewgameEditor.Target.cs
-<pre><code class="cpp">
+```bash
 using UnrealBuildTool;
 using System.Collections.Generic;
 
@@ -120,24 +122,24 @@ public class Building_EscapeEditorTarget : TargetRules
 		ExtraModuleNames.AddRange( new string[] { "Newgame", "Mymodule" } );
 	}
 }
-</code></pre>
+```
 > This is the final result, I only added **Mymodule** to load
 
 #### Changes
 
 ##### From
-<pre><code class="cpp">
+```bash
     ExtraModuleNames.AddRange( new string[] { "Newgame"} );
-</code></pre>
+```
 ##### To
-<pre><code class="cpp">
+```bash
     ExtraModuleNames.AddRange( new string[] { "Newgame", "Mymodule" } );
-</code></pre>
+```
 
 ### Step6 - Add the module to the .uproject file
 > **File** /home/rafa/Games/Newgame/**Newgame.uproject**
 
-<pre><code class="cpp">
+```bash
 {
 	"FileVersion": 3,
 	"EngineAssociation": "4.25",
@@ -156,12 +158,12 @@ public class Building_EscapeEditorTarget : TargetRules
 		}
 	]
 }
-</code></pre>
+```
 > This is the final result, I only added **Mymodule** to load
 #### Changes
 
 ##### From
-<pre><code class="cpp">
+```bash
 "Modules": [
     {
         "Name": "Newgame",
@@ -169,9 +171,9 @@ public class Building_EscapeEditorTarget : TargetRules
         "LoadingPhase": "Default"
     }
 ]
-</code></pre>
+```
 ##### To
-<pre><code class="cpp">
+```bash
 "Modules": [
     {
         "Name": "Newgame",
@@ -184,6 +186,6 @@ public class Building_EscapeEditorTarget : TargetRules
         "LoadingPhase": "Default"
     }
 ]
-</code></pre>
+```
 
 Note: Any questions related to this I will be very happy to discuss about it, and if you know how to add as an object, could be nice to talk to me, anyway, if you need help on this I am your guy!
