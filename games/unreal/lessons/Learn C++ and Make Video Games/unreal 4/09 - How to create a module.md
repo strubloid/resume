@@ -13,7 +13,7 @@ Note: for linux/mac users the character **~** means the user folder, if my user 
 
 ## Basic structure of a module
 So for this explanation I will be using the folder **~/Games/Newgame**:
-```Shell
+```sh
     # You must create the module folder
     $ mkdir Mymodule
 
@@ -31,7 +31,7 @@ So for this explanation I will be using the folder **~/Games/Newgame**:
 > **Path** /home/rafa/Games/Newgame/Mymodule <br />
 > **File** /home/rafa/Games/Newgame/Mymodule/**Mymodule.h**
 
-```Shell
+```cpp
     #pragma once
 
     #include "CoreMinimal.h"
