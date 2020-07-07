@@ -2,13 +2,13 @@
 
 ## Nomenclature
 * [project-root]: this is the folder that you have your project, like:
-<pre><code class="bash">
+```bash
     # For windows users
     c:/Games
 
     # For linux/mac users
     ~/Games
-</code></pre>
+```
 Note: for linux/mac users the character **~** means the user folder, if my user is rafa, **my ~ folder** will be: ``/home/rafa``
 
 ## Basic structure of a module
