@@ -2,7 +2,7 @@
 
 ## Nomenclature
 * [project-root]: this is the folder that you have your project, like:
-```Shell
+```sh
     # For windows users
     c:/Games
 
@@ -31,7 +31,7 @@ So for this explanation I will be using the folder **~/Games/Newgame**:
 > **Path** /home/rafa/Games/Newgame/Mymodule <br />
 > **File** /home/rafa/Games/Newgame/Mymodule/**Mymodule.h**
 
-```bash
+```Shell
     #pragma once
 
     #include "CoreMinimal.h"
@@ -46,7 +46,7 @@ So for this explanation I will be using the folder **~/Games/Newgame**:
 > **Path** /home/rafa/Games/Newgame/Mymodule <br />
 > **File** /home/rafa/Games/Newgame/Mymodule/**Mymodule.cpp**
 
-```Shell
+```cpp
     #include "Mymodule.h"
     #include "Modules/ModuleManager.h"
 
@@ -57,7 +57,7 @@ So for this explanation I will be using the folder **~/Games/Newgame**:
 > **Path** /home/rafa/Games/Newgame/Mymodule <br />
 > **File** /home/rafa/Games/Newgame/Mymodule/**Mymodule.Build.cs**
 
-```bash
+```cpp
     using UnrealBuildTool;
 
     public class Mymodule : ModuleRules
@@ -79,7 +79,7 @@ So for this explanation I will be using the folder **~/Games/Newgame**:
 
 ### Step4 - Changing the Newgame.Target.cs
 
-```bash
+```cpp
 using UnrealBuildTool;
 using System.Collections.Generic;
 
@@ -99,17 +99,17 @@ public class Building_EscapeTarget : TargetRules
 #### Changes
 
 ##### From
-```bash
+```cpp
     ExtraModuleNames.AddRange( new string[] { "Newgame"} );
 ```
 ##### To
-```bash
+```cpp
     ExtraModuleNames.AddRange( new string[] { "Newgame", "Mymodule" } );
 ```
 
 
 ### Step5 - Changing the NewgameEditor.Target.cs
-```bash
+```cpp
 using UnrealBuildTool;
 using System.Collections.Generic;
 
@@ -128,18 +128,18 @@ public class Building_EscapeEditorTarget : TargetRules
 #### Changes
 
 ##### From
-```bash
+```cpp
     ExtraModuleNames.AddRange( new string[] { "Newgame"} );
 ```
 ##### To
-```bash
+```cpp
     ExtraModuleNames.AddRange( new string[] { "Newgame", "Mymodule" } );
 ```
 
 ### Step6 - Add the module to the .uproject file
 > **File** /home/rafa/Games/Newgame/**Newgame.uproject**
 
-```bash
+```json
 {
 	"FileVersion": 3,
 	"EngineAssociation": "4.25",
@@ -163,7 +163,7 @@ public class Building_EscapeEditorTarget : TargetRules
 #### Changes
 
 ##### From
-```bash
+```json
 "Modules": [
     {
         "Name": "Newgame",
@@ -173,7 +173,7 @@ public class Building_EscapeEditorTarget : TargetRules
 ]
 ```
 ##### To
-```bash
+```json
 "Modules": [
     {
         "Name": "Newgame",
