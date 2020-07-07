@@ -2,7 +2,7 @@
 
 ## Nomenclature
 * [project-root]: this is the folder that you have your project, like:
-```bash
+```shell
     # For windows users
     c:/Games
 
@@ -13,7 +13,7 @@ Note: for linux/mac users the character **~** means the user folder, if my user 
 
 ## Basic structure of a module
 So for this explanation I will be using the folder **~/Games/Newgame**:
-<pre><code class="shell">
+```shell
     # You must create the module folder
     $ mkdir Mymodule
 
@@ -25,7 +25,7 @@ So for this explanation I will be using the folder **~/Games/Newgame**:
     -rw-r--r-- 1 rafa   0 Jul  7 12:41 Mymodule.Build.cs
     -rw-r--r-- 1 rafa   0 Jul  7 12:41 Mymodule.cpp
     -rw-r--r-- 1 rafa   0 Jul  7 12:41 Mymodule.h
-</code></pre>
+```
 
 ### Step1 - Crating the Mymodule.h
 > **Path** /home/rafa/Games/Newgame/Mymodule <br />
@@ -133,3 +133,57 @@ public class Building_EscapeEditorTarget : TargetRules
 <pre><code class="cpp">
     ExtraModuleNames.AddRange( new string[] { "Newgame", "Mymodule" } );
 </code></pre>
+
+### Step6 - Add the module to the .uproject file
+> **File** /home/rafa/Games/Newgame/**Newgame.uproject**
+
+<pre><code class="cpp">
+{
+	"FileVersion": 3,
+	"EngineAssociation": "4.25",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "Newgame",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "Mymodule",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
+</code></pre>
+> This is the final result, I only added **Mymodule** to load
+#### Changes
+
+##### From
+<pre><code class="cpp">
+"Modules": [
+    {
+        "Name": "Newgame",
+        "Type": "Runtime",
+        "LoadingPhase": "Default"
+    }
+]
+</code></pre>
+##### To
+<pre><code class="cpp">
+"Modules": [
+    {
+        "Name": "Newgame",
+        "Type": "Runtime",
+        "LoadingPhase": "Default"
+    },
+    {
+        "Name": "Mymodule",
+        "Type": "Runtime",
+        "LoadingPhase": "Default"
+    }
+]
+</code></pre>
+
+Note: Any questions related to this I will be very happy to discuss about it, and if you know how to add as an object, could be nice to talk to me, anyway, if you need help on this I am your guy!
