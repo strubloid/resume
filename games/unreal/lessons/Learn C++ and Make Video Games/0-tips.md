@@ -32,3 +32,9 @@ $ cl <name of the file>.cpp
 $ cl TripleX.cpp
 $ ./<name of the file>.exe
 ```
+
+
+## Folder that contains the .generated elements
+```sh
+    D:\unreal-games\Game\Intermediate\Build\Win64\UE4Editor\Inc\Module\Module.generated.h
+```
