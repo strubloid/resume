@@ -49,6 +49,9 @@ sudo add-apt-repository ppa:lutris-team/lutris
 sudo apt update
 sudo apt install -y lutris
 
+## Heroku installation
+sudo snap install --classic heroku
+
 ## Installation of steam
 sudo apt install -y steam
 
