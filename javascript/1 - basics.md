@@ -16,3 +16,15 @@ if(($j(window).width() < 768 && $j(window).height() < 1024 ) || ($j(window).widt
 ```
 console.log('Your screen resolution is ' + screen.width + 'x' + screen.height);
 ```
+
+
+## Object Destructuring
+```jsx
+formatCount () {
+    const { count } = this.state;
+    return count === 0 ? 'Zero' : count;
+}
+```
+* you are getting the **this.state** as **subject**
+* you will be getting on **count** the **this.state.count**
+* you can use **count** as we use **this.state.count**
