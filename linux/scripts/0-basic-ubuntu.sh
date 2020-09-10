@@ -57,3 +57,6 @@ sudo apt install -y steam
 
 ## Net tools that you will be using
 sudo apt install net-tools
+
+## Installation of react tools
+npm install -g react-devtools
