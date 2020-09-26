@@ -5,7 +5,7 @@ This part you will learn how to configure a different config.php, a development 
 How can we do this?
 * copy the config.php: 
 ```
-$> cp config.php config_dev.php
+    $ cp config.php config_dev.php
 ```
 * Edit the file **.htaccess**, uncommenting those lines:
 ```

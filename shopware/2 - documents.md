@@ -1,5 +1,5 @@
-
 # root folder
+
 ## config.php
 > This is the main configuration file for shopware, this will take your configuration and make sure that will coneect with your services (database, elastic search...)
 

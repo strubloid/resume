@@ -1,6 +1,5 @@
 # Basic commands in Bootstrap 4
 
-
 # Bootstrap grid
 * main div = .container
 * now you can create .rows 
@@ -63,8 +62,3 @@
 > this will push to the right who is on the right side
 > space can be showing up in the center as the elements will be on the corner
 > all the avaiable space will be put between the columns
->
-
-
-## vertical align
-

@@ -1,4 +1,3 @@
-
 # url for training
 developers.shopware.com
 
