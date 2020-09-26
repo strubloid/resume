@@ -47,10 +47,10 @@ handleDelete = (counterId) => {
 ### Good practice on sending references to Parent classes
 * It is good to pass the whole object reference, as if we have new variables of this object, it will be also passed
 
-| Object   | From/To | Code                                                                                                           |
-|:---------|:--------|:---------------------------------------------------------------------------------------------------------------|
-| Counters | From    | <code><Counter key={counter.id} onDelete={this.handleDelete} value={counter.value} id={counter.id}  /> </code> |
-| Counter  | To      | <code><Counter key={counter.id} onDelete={this.handleDelete} counter={counter} /> </code>                      |
+| Object   | From/To | Code                                                                                                   |
+|:---------|:--------|:-------------------------------------------------------------------------------------------------------|
+| Counters | From    | ```<Counter key={counter.id} onDelete={this.handleDelete} value={counter.value} id={counter.id}  />``` |
+| Counter  | To      | ```<Counter key={counter.id} onDelete={this.handleDelete} counter={counter} /> ```                     |
 
 ## Single source of truth
 * We have state for each component
