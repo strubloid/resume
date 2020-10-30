@@ -1,8 +1,5 @@
-
-
 # Basic structure
 In an Angular app we have 4 key players
-
 
 ## Components
 Encapsulate the template, data and behaviour of the view.
@@ -51,11 +48,17 @@ You can follow the previous url link and do all the steps, or you can read my ex
 This command will allow you on a terminal environment to create npm-global under your user home folder (~)
 
 ## Configure npm to use the new directory path:
+By the way, if you are a curious person and want to know what was there before change to the ~/.npm-global, you must do:
+```
+  npm config get prefix
+```
+
+To Set a new configuration folder you must do the following:
 ```
   npm config set prefix '~/.npm-global'
 ```
 If you have node installed on your computer, this command config it's to access the node configuration,
-set it is the command to overrride one of those configs, and when we set a prefix, that means we will
+set it is the command to override one of those configs, and when we set a prefix, that means we will
 be using a new prefix (a new source folder), in our case npm-global (that we created before)
 
 ## Adding the path to our ~/.profile or any ~/.bash_aliases file
@@ -68,7 +71,7 @@ If you already have the ~/.profile you must add this content to the bottom of th
 ## update the current terminal with this configuration
 On linux and mac the file that is loaded anytime its is called .profile under your home folder
 you must add variables over there and you can find this file on ~/.profile.
-Now that we have a new variable on the .profile file, we need to update your system variables:
+Now we have a new variable on the .profile file, we need to update your system variables:
 ```
  source ~/.profile
 ```
@@ -84,8 +87,13 @@ Now you are ready to run any npm command without the need of use the sudo
 
 ## Install angular project
 ```
-  npm install -g angular-cli
+  npm install -g @angular/cli@latest
 
   ng new [project_name]
   ng serve
 ```
+
+### Accesing
+By default, we will have available on: http://localhost:4200/
+
+
